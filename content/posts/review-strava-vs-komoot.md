@@ -3,7 +3,6 @@ slug: "review-strava-vs-komoot"
 title: "Strava vs Komoot: Mana yang Terbaik untuk Pesepeda Indonesia?"
 date: 2026-01-22
 category: "App Review"
-image: "/images/uploads/strava-komoot.jpg"
 rating: 4
 tags:
   - Strava

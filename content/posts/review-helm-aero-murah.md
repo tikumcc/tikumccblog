@@ -3,7 +3,6 @@ slug: "review-helm-aero-murah"
 title: "Helm Aero Murah Terbaik 2025: Uji 5 Model di Bawah 1 Juta"
 date: 2026-01-18
 category: "Product Review"
-image: "/images/uploads/helm-aero-test.jpg"
 rating: 4
 tags:
   - Helm

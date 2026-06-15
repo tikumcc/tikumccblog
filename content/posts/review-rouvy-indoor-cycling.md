@@ -3,7 +3,6 @@ slug: "review-rouvy-indoor-cycling"
 title: "Rouvy Indoor Cycling: Worth It untuk Latihan Musim Hujan?"
 date: 2026-01-25
 category: "App Review"
-image: "/images/uploads/rouvy-indoor.jpg"
 rating: 3
 tags:
   - Rouvy
