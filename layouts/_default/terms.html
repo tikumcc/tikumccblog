@@ -1,0 +1,25 @@
+{{ define "title" }}Tags — {{ .Site.Title }}{{ end }}
+{{ define "description" }}Jelajahi artikel berdasarkan tag — dari Polygon, Strava, hingga Tour de Indonesia.{{ end }}
+
+{{ define "main" }}
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
+  <div class="py-8 sm:pt-11 sm:pb-5">
+    <div class="flex items-center gap-2 mb-3">
+      <a href="/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">Beranda</a>
+      <span class="text-[#c4c4ca] text-[13px]">/</span>
+      <span class="text-[#fc5200] font-['Inter'] text-[13px] font-semibold">Tags</span>
+    </div>
+    <h1 class="text-[#1a1a1a] font-['Inter'] text-[32px] sm:text-[42px] font-extrabold leading-[1.1] tracking-[-1px]">Tags</h1>
+    <p class="max-w-[620px] text-[#5a5a62] font-['Inter'] text-base leading-[1.55] mt-3">Jelajahi artikel berdasarkan topik.</p>
+  </div>
+
+  <div class="flex flex-wrap gap-3 pb-9">
+    {{ range .Site.Taxonomies.tags.ByCount }}
+    <a href="/tags/{{ .Page.Slug | default (.Page.Title | urlize) }}/" class="inline-flex items-center bg-white border border-[#ececf0] hover:border-[#fc5200] hover:text-[#fc5200] rounded-full px-5 py-2.5 text-[#5a5a62] font-['Inter'] text-sm font-medium no-underline transition-colors gap-1.5">
+      <span>#{{ .Page.Title }}</span>
+      <span class="text-[#9a9aa0] text-xs font-semibold">{{ .Count }}</span>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

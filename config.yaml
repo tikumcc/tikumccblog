@@ -2,10 +2,12 @@ baseURL: https://blog.tikum.cc/
 locale: id-ID
 title: "tikum.cc / blog"
 
-# Disable default taxonomies; we use custom 'categories' via front matter
+# Enable tags taxonomy for tag pages (/tags/ and /tags/<name>/)
+# Category is handled via custom front matter — no Hugo taxonomy needed
 disableKinds:
-  - taxonomy
-  - term
+  - RSS
+taxonomies:
+  tag: tags
 
 # Menus
 menu:

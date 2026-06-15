@@ -1,0 +1,54 @@
+{{ define "title" }}#{{ .Title }} — {{ .Site.Title }}{{ end }}
+{{ define "description" }}Artikel dengan tag {{ .Title }}{{ end }}
+
+{{ define "main" }}
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
+  <div class="py-8 sm:pt-11 sm:pb-5">
+    <div class="flex items-center gap-2 mb-3">
+      <a href="/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">Beranda</a>
+      <span class="text-[#c4c4ca] text-[13px]">/</span>
+      <a href="/tags/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">Tags</a>
+      <span class="text-[#c4c4ca] text-[13px]">/</span>
+      <span class="text-[#fc5200] font-['Inter'] text-[13px] font-semibold">#{{ .Title }}</span>
+    </div>
+    <h1 class="text-[#1a1a1a] font-['Inter'] text-[32px] sm:text-[42px] font-extrabold leading-[1.1] tracking-[-1px]">#{{ .Title }}</h1>
+    <p class="text-[#9a9aa0] font-['Inter'] text-[13px] font-semibold mt-1">{{ len .Pages }} artikel</p>
+  </div>
+
+  <div class="flex flex-wrap gap-4 sm:gap-6 pb-9">
+    {{ range .Pages.ByDate.Reverse }}
+    <article class="w-full sm:w-[calc(50%-12px)] lg:w-[352px] flex flex-col bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] overflow-hidden">
+      {{ if .Params.image }}
+      <div class="w-full h-[180px] bg-[#e8e4dc] bg-cover bg-center" style="background-image: url('{{ .Params.image | relURL }}');"></div>
+      {{ else }}
+      <div class="w-full h-[180px] bg-[#e8e4dc]"></div>
+      {{ end }}
+      <div class="flex flex-col p-[18px] gap-2">
+        <span class="text-[#fc5200] font-['Inter'] text-[11px] font-bold tracking-[0.6px] uppercase">{{ .Params.category }}</span>
+        <h2 class="text-[#1a1a1a] font-['Inter'] text-[17px] font-bold leading-[1.3] tracking-[-0.3px]">
+          <a href="{{ .RelPermalink }}" class="text-inherit no-underline hover:text-[#fc5200]">{{ .Title }}</a>
+        </h2>
+        {{ if .Params.description }}
+        <p class="text-[#5a5a62] font-['Inter'] text-[13px] leading-[1.55]">{{ .Params.description }}</p>
+        {{ end }}
+        <div class="flex justify-between items-center mt-1.5">
+          <time class="text-[#9a9aa0] font-['Inter'] text-xs font-medium" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+          {{ if .Params.rating }}
+          <div class="star-rating">
+            {{ $rating := .Params.rating }}
+            {{ range seq 5 }}
+              {{ if le . $rating }}
+              <svg class="w-3.5 h-3.5 text-[#fc5200]" viewBox="0 0 576 512" fill="currentColor"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+              {{ else }}
+              <svg class="w-3.5 h-3.5 text-[#e0e0e4]" viewBox="0 0 576 512" fill="currentColor"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+              {{ end }}
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

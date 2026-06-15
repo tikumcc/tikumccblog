@@ -67,7 +67,7 @@
         <h3 class="text-[#9a9aa0] font-['Inter'] text-[11px] font-bold tracking-[0.6px] uppercase mb-3">Tags</h3>
         <div class="flex flex-wrap gap-2">
           {{ range .Params.tags }}
-          <span class="inline-flex items-center bg-[#f1f1f4] rounded-full px-3.5 py-1.5 text-[#5a5a62] font-['Inter'] text-xs font-medium"># {{ . }}</span>
+          <a href="/tags/{{ . | urlize }}/" class="inline-flex items-center bg-[#f1f1f4] hover:bg-[#fc5200] hover:text-white rounded-full px-3.5 py-1.5 text-[#5a5a62] font-['Inter'] text-xs font-medium no-underline transition-colors"># {{ . }}</a>
           {{ end }}
         </div>
       </div>
