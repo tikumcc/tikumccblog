@@ -10,26 +10,18 @@ disableKinds:
 # Menus
 menu:
   main:
-    - identifier: home
-      name: Beranda
-      url: /
-      weight: 1
     - identifier: reviews
       name: Ulasan
       url: /reviews/
-      weight: 2
+      weight: 1
     - identifier: tips
       name: Tips
       url: /tips/
-      weight: 3
+      weight: 2
     - identifier: news
       name: Berita
       url: /news/
-      weight: 4
-    - identifier: about
-      name: Tentang
-      url: /about/
-      weight: 5
+      weight: 3
 
 # Hugo config
 publishDir: public
