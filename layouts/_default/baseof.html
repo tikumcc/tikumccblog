@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ block "description" . }}Ulasan produk, aplikasi, tips, dan berita sepeda untuk pesepeda Indonesia.{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f7f7f8; color: #1a1a1a; }
+    .prose { max-width: none; }
+    .prose h2 { font-size: 1.5rem; font-weight: 800; margin-top: 1.5rem; margin-bottom: 0.75rem; letter-spacing: -0.02em; color: #1a1a1a; }
+    .prose h3 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #1a1a1a; }
+    .prose p { font-size: 1.0625rem; line-height: 1.75; color: #2a2a30; margin-bottom: 1rem; }
+    .prose ul, .prose ol { font-size: 1.0625rem; line-height: 1.75; color: #2a2a30; padding-left: 1.5rem; margin-bottom: 1rem; }
+    .prose li { margin-bottom: 0.25rem; }
+    .prose blockquote { border-left: 3px solid #fc5200; padding: 0.375rem 0 0.375rem 1.25rem; margin: 0.5rem 0; font-style: italic; font-size: 1.125rem; color: #1a1a1a; }
+    .prose img { border-radius: 14px; margin: 1rem 0; width: 100%; }
+    .prose a { color: #fc5200; font-weight: 600; text-decoration: underline; }
+    .prose strong { font-weight: 700; color: #1a1a1a; }
+    .category-badge { background: #fc5200; color: white; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.375rem 0.75rem; border-radius: 9999px; display: inline-block; }
+    .star-rating { display: inline-flex; align-items: center; gap: 2px; }
+    .star { width: 14px; height: 14px; color: #fc5200; }
+    .star-empty { width: 14px; height: 14px; color: #e0e0e4; }
+  </style>
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main class="w-full max-w-full overflow-hidden">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

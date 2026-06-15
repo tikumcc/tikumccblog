@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+  use_graphql: true
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    label_singular: "Post"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Category", name: "category", widget: "select", options: ["Product Review", "App Review", "Tips", "News"]}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, required: false, value_type: "float"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}

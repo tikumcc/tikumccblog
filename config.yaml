@@ -1,0 +1,55 @@
+baseURL: /
+locale: id-ID
+title: "tikum.cc / blog"
+theme: ""
+
+# Disable default taxonomies; we use custom 'categories' via front matter
+disableKinds:
+  - taxonomy
+  - term
+
+# Menus
+menu:
+  main:
+    - identifier: home
+      name: Beranda
+      url: /
+      weight: 1
+    - identifier: reviews
+      name: Ulasan
+      url: /reviews/
+      weight: 2
+    - identifier: tips
+      name: Tips
+      url: /tips/
+      weight: 3
+    - identifier: news
+      name: Berita
+      url: /news/
+      weight: 4
+    - identifier: about
+      name: Tentang
+      url: /about/
+      weight: 5
+
+# Hugo config
+publishDir: public
+buildDrafts: false
+enableRobotsTXT: true
+
+# Markdown rendering
+markup:
+  goldmark:
+    renderer:
+      unsafe: true  # allow inline HTML in markdown
+
+# Create category pages automatically
+outputs:
+  home:
+    - HTML
+  page:
+    - HTML
+
+# Category-based sections for routing
+permalinks:
+  posts: /:slug/

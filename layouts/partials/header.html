@@ -1,0 +1,16 @@
+<header class="bg-white border-b border-[#ececf0]">
+  <div class="max-w-[1200px] mx-auto flex items-center h-16 px-4 sm:px-6 lg:px-12 gap-4 sm:gap-7">
+    <div class="flex items-baseline gap-[2px] shrink-0">
+      <a href="/" class="text-[#1a1a1a] font-['Inter'] text-xl sm:text-[22px] font-extrabold tracking-[-0.5px] no-underline">tikum</a>
+      <span class="text-[#fc5200] font-['Inter'] text-xl sm:text-[22px] font-extrabold tracking-[-0.5px]">.cc</span>
+      <span class="ml-0.5 sm:ml-1.5 text-[#9a9aa0] font-['Inter'] text-[13px] font-semibold">/ blog</span>
+    </div>
+    <nav class="flex items-center flex-1 gap-4 sm:gap-7 overflow-x-auto">
+      {{ $currentPage := . }}
+      {{ range .Site.Menus.main }}
+        {{ $active := or (eq $currentPage.RelPermalink .URL) (and (ne .Identifier "home") (hasPrefix $currentPage.RelPermalink .URL)) }}
+        <a href="{{ .URL }}" class="text-sm whitespace-nowrap no-underline {{ if $active }}text-[#fc5200] font-semibold{{ else }}text-[#5a5a62] font-medium{{ end }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </div>
+</header>
