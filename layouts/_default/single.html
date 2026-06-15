@@ -106,8 +106,32 @@
           data-page-id="{{ .RelPermalink }}"
           data-page-url="{{ .Permalink }}"
           data-page-title="{{ .Title }}"
+          data-lang="id"
         ></div>
         <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+        <script>
+        // Match Cusdis theme to blog
+        const cusdisObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length == 0) return;
+            var iframe = mutation.addedNodes[0];
+            if (iframe.tagName !== 'IFRAME') return;
+            var styles = [
+              '.cusdis__comment-input-wrapper textarea:focus { border-color: #fc5200 !important; }',
+              '.cusdis__comment-input-wrapper textarea:focus-visible { outline: none !important; }',
+              '.cusdis__btn.cusdis__btn-primary { background: #fc5200 !important; border-color: #fc5200 !important; }',
+              '.cusdis__btn.cusdis__btn-primary:hover { background: #e04900 !important; }',
+              '.cusdis__comment-username { color: #fc5200 !important; }',
+              '.cusdis__comment-date { font-size: 11px !important; }',
+            ].join('');
+            iframe.srcdoc = iframe.srcdoc.replace('</style>', styles + '</style>');
+          });
+        });
+        var cusdisEl = document.getElementById("cusdis_thread");
+        if (cusdisEl) {
+          cusdisObserver.observe(cusdisEl, { childList: true, subtree: true });
+        }
+        </script>
       </div>
 
       {{ if gt (len (where .Site.RegularPages "Section" "posts")) 1 }}
