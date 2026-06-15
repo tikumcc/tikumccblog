@@ -1,15 +1,17 @@
 ---
-slug: "berita-tour-de-indonesia-2025"
-title: "Tour de Indonesia 2025 Resmi Digelar di Tujuh Provinsi"
+slug: berita-tour-de-indonesia-2025
+title: Tour de Indonesia 2025 Resmi Digelar di Tujuh Provinsi
 date: 2026-02-01
-category: "News"
+category: News
 tags:
   - Tour de Indonesia
   - Balap Sepeda
   - Event
   - Berita
-description: "Balapan jalan raya terbesar di Tanah Air kembali hadir dengan rute menantang melintasi pegunungan."
+description: Balapan jalan raya terbesar di Tanah Air kembali hadir dengan rute
+  menantang melintasi pegunungan.
 ---
+![](https://cheapbromoijen.com/storage/2025/05/Tour-de-Ijen.png)
 
 Tour de Indonesia 2025 resmi diumumkan oleh ISSI (Ikatan Sepeda Sport Indonesia) dengan rute yang lebih panjang dan menantang dibanding tahun sebelumnya. Balapan bergengsi ini akan melintasi tujuh provinsi dengan total jarak lebih dari 1.200 km.
 
@@ -19,9 +21,9 @@ Event akan dimulai dari Banda Aceh pada 12 Maret 2025 dan finis di Jakarta pada 
 
 Beberapa etape yang dinantikan:
 
-- **Etape 3: Medan – Danau Toba (180 km)** — Tanjakan panjang dengan pemandangan spektakuler
-- **Etape 7: Lampung – Anyer (160 km)** — Rute pantai dengan angin kencang
-- **Etape 10: Bandung – Jakarta (200 km)** — Etape penentuan di jalanan Jawa Barat
+* **Etape 3: Medan – Danau Toba (180 km)** — Tanjakan panjang dengan pemandangan spektakuler
+* **Etape 7: Lampung – Anyer (160 km)** — Rute pantai dengan angin kencang
+* **Etape 10: Bandung – Jakarta (200 km)** — Etape penentuan di jalanan Jawa Barat
 
 ## Tim yang Berpartisipasi
 
