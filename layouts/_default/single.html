@@ -11,8 +11,8 @@
       <span class="text-[#c4c4ca] text-[13px]">/</span>
       {{ if $category }}
         {{ $catSlug := "reviews" }}
+        {{ if eq $category "Ulasan" }}{{ $catSlug = "reviews" }}{{ end }}
         {{ if eq $category "Tips" }}{{ $catSlug = "tips" }}{{ end }}
-        {{ if eq $category "News" }}{{ $catSlug = "news" }}{{ end }}
         {{ if eq $category "Berita" }}{{ $catSlug = "news" }}{{ end }}
         <a href="/{{ $catSlug }}/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">{{ $category }}</a>
         <span class="text-[#c4c4ca] text-[13px]">/</span>

@@ -2,7 +2,7 @@
 slug: berita-tour-de-indonesia-2025
 title: Tour de Indonesia 2025 Resmi Digelar di Tujuh Provinsi
 date: 2026-02-01
-category: Tips
+category: "Berita"
 tags:
   - Tour de Indonesia
   - Balap Sepeda
