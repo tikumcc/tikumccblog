@@ -1,4 +1,5 @@
 ---
+slug: "tips-bersepeda-aman-jakarta"
 title: "7 Tips Bersepeda Aman di Jalanan Kota Jakarta"
 date: 2026-01-28
 category: "Tips"
