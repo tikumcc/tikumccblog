@@ -73,6 +73,30 @@
       </div>
       {{ end }}
 
+      {{ if .Params.author }}
+      {{ $author := $.Site.GetPage (printf "/authors/%s" .Params.author) }}
+      {{ if $author }}
+      <div class="bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] p-5 mb-5">
+        <h3 class="text-[#9a9aa0] font-['Inter'] text-[11px] font-bold tracking-[0.6px] uppercase mb-3">Penulis</h3>
+        <div class="flex items-start gap-3">
+          {{ $img := $author.Params.image | default "" }}
+          {{ $name := $author.Params.name | default $author.Title }}
+          {{ if $img }}
+          <div class="w-10 h-10 shrink-0 rounded-full bg-[#e8e4dc] bg-cover bg-center overflow-hidden" style="background-image: url('{{ $img | relURL }}');"></div>
+          {{ else }}
+          <div class="w-10 h-10 shrink-0 rounded-full bg-[#e8e4dc] flex items-center justify-center text-[#9a9aa0] font-['Inter'] text-sm font-bold">{{ substr $name 0 1 }}</div>
+          {{ end }}
+          <div class="flex-1 min-w-0">
+            <a href="/authors/{{ $author.Params.slug | default $author.File.ContentBaseName }}/" class="text-[#1a1a1a] font-['Inter'] text-[13px] font-semibold no-underline hover:text-[#fc5200] block">{{ $name }}</a>
+            {{ if $author.Params.bio }}
+            <p class="text-[#5a5a62] font-['Inter'] text-[11px] leading-[1.45] mt-0.5">{{ $author.Params.bio }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+      {{ end }}
+      {{ end }}
+
       {{ if gt (len (where .Site.RegularPages "Section" "posts")) 1 }}
       <div class="bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] p-5">
         <h3 class="text-[#9a9aa0] font-['Inter'] text-[11px] font-bold tracking-[0.6px] uppercase mb-3">Artikel Terkait</h3>
@@ -91,13 +115,6 @@
       {{ end }}
     </aside>
   </div>
-
-  {{/* Author profile */}}
-  {{ if .Params.author }}
-  <div class="pb-12 max-w-[680px]">
-    {{ partial "author-profile" . }}
-  </div>
-  {{ end }}
 </div>
 
 {{/* SEO: Article author structured data */}}
