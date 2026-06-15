@@ -1,7 +1,6 @@
 baseURL: /
 locale: id-ID
 title: "tikum.cc / blog"
-theme: ""
 
 # Disable default taxonomies; we use custom 'categories' via front matter
 disableKinds:
