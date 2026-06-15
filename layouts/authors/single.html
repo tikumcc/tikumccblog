@@ -1,0 +1,132 @@
+{{ define "title" }}{{ .Params.name | default .Title }} — {{ .Site.Title }}{{ end }}
+{{ define "description" }}{{ .Params.bio | default (printf "Profil penulis %s" (.Params.name | default .Title)) }}{{ end }}
+
+{{ define "main" }}
+{{ $name := .Params.name | default .Title }}
+{{ $slug := .Params.slug | default .File.ContentBaseName }}
+{{ $image := .Params.image | default "" }}
+{{ $bio := .Params.bio | default "" }}
+{{ $social := .Params.social | default dict }}
+
+{{/* Find posts by this author */}}
+{{ $authorPosts := where .Site.RegularPages "Params.author" $slug }}
+
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
+  {{/* Breadcrumbs */}}
+  <div class="py-8 sm:pt-10 sm:pb-7">
+    <div class="flex items-center gap-2 mb-4">
+      <a href="/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">Beranda</a>
+      <span class="text-[#c4c4ca] text-[13px]">/</span>
+      <a href="/authors/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">Penulis</a>
+      <span class="text-[#c4c4ca] text-[13px]">/</span>
+      <span class="text-[#fc5200] font-['Inter'] text-[13px] font-semibold">{{ $name }}</span>
+    </div>
+
+    {{/* Author profile header */}}
+    <div class="flex items-start gap-5 sm:gap-7">
+      {{ if $image }}
+      <div class="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-[#e8e4dc] bg-cover bg-center overflow-hidden" style="background-image: url('{{ $image | relURL }}');"></div>
+      {{ else }}
+      <div class="w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-full bg-[#e8e4dc] flex items-center justify-center text-[#9a9aa0] font-['Inter'] text-2xl font-bold">{{ substr $name 0 1 }}</div>
+      {{ end }}
+      <div class="flex-1 min-w-0">
+        <h1 class="text-[#1a1a1a] font-['Inter'] text-[28px] sm:text-[36px] font-extrabold leading-[1.1] tracking-[-1px]">{{ $name }}</h1>
+        {{ if $bio }}
+        <p class="text-[#5a5a62] font-['Inter'] text-[15px] leading-[1.6] mt-2 max-w-[620px]">{{ $bio }}</p>
+        {{ end }}
+        <p class="text-[#9a9aa0] font-['Inter'] text-[13px] font-semibold mt-1">{{ len $authorPosts }} artikel</p>
+        {{ $hasSocial := or $social.instagram $social.x $social.linkedin $social.website }}
+        {{ if $hasSocial }}
+        <div class="flex items-center gap-3 mt-3">
+          {{ with $social.website }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="Website">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </a>
+          {{ end }}
+          {{ with $social.instagram }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="Instagram">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          {{ end }}
+          {{ with $social.x }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="X / Twitter">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          {{ end }}
+          {{ with $social.linkedin }}
+          <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="LinkedIn">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{/* Author's articles */}}
+  {{ if gt (len $authorPosts) 0 }}
+  <div class="flex flex-wrap gap-4 sm:gap-6 pb-9">
+    {{ range $authorPosts.ByDate.Reverse }}
+    <article class="w-full sm:w-[calc(50%-12px)] lg:w-[352px] flex flex-col bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] overflow-hidden">
+      {{ if .Params.image }}
+      <div class="w-full h-[180px] bg-[#e8e4dc] bg-cover bg-center" style="background-image: url('{{ .Params.image | relURL }}');"></div>
+      {{ else }}
+      <div class="w-full h-[180px] bg-[#e8e4dc]"></div>
+      {{ end }}
+      <div class="flex flex-col p-[18px] gap-2">
+        <span class="text-[#fc5200] font-['Inter'] text-[11px] font-bold tracking-[0.6px] uppercase">{{ .Params.category }}</span>
+        <h2 class="text-[#1a1a1a] font-['Inter'] text-[17px] font-bold leading-[1.3] tracking-[-0.3px]">
+          <a href="{{ .RelPermalink }}" class="text-inherit no-underline hover:text-[#fc5200]">{{ .Title }}</a>
+        </h2>
+        {{ if .Params.description }}
+        <p class="text-[#5a5a62] font-['Inter'] text-[13px] leading-[1.55]">{{ .Params.description }}</p>
+        {{ end }}
+        <div class="flex justify-between items-center mt-1.5">
+          <time class="text-[#9a9aa0] font-['Inter'] text-xs font-medium" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+          {{ if .Params.rating }}
+          <div class="star-rating">
+            {{ $rating := .Params.rating }}
+            {{ range seq 5 }}
+              {{ if le . $rating }}
+              <svg class="w-3.5 h-3.5 text-[#fc5200]" viewBox="0 0 576 512" fill="currentColor"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+              {{ else }}
+              <svg class="w-3.5 h-3.5 text-[#e0e0e4]" viewBox="0 0 576 512" fill="currentColor"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+              {{ end }}
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+  {{ else }}
+  <p class="text-[#9a9aa0] font-['Inter'] text-[15px] pb-9">Belum ada artikel dari penulis ini.</p>
+  {{ end }}
+</div>
+
+{{/* SEO: Author structured data */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ $name | jsonify }},
+  {{ if $image }}"image": {{ ($image | absURL) | jsonify }},{{ end }}
+  {{ if $bio }}"description": {{ $bio | jsonify }},{{ end }}
+  "url": {{ .Permalink | jsonify }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  }
+  {{ if $hasSocial }},
+  "sameAs": [
+    {{ with $social.website }}{{ . | jsonify }},{{ end }}
+    {{ with $social.instagram }}{{ . | jsonify }},{{ end }}
+    {{ with $social.x }}{{ . | jsonify }},{{ end }}
+    {{ with $social.linkedin }}{{ . | jsonify }}{{ end }}
+  ]
+  {{ end }}
+}
+</script>
+{{ end }}

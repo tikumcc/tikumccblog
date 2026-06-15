@@ -1,0 +1,60 @@
+{{/* Author profile partial
+   Usage: {{ partial "author-profile" . }}
+   Requires .Params.author set to the author's filename slug (e.g., "tikum-team")
+   Looks up content/authors/<slug>.md for profile data.
+*/}}
+{{ $author := false }}
+{{ with .Params.author }}
+  {{ with $.Site.GetPage (printf "/authors/%s" .) }}
+    {{ $author = . }}
+  {{ end }}
+{{ end }}
+
+{{ if $author }}
+{{ $name := $author.Params.name | default $author.Title }}
+{{ $slug := $author.Params.slug | default $author.File.ContentBaseName }}
+{{ $image := $author.Params.image | default "" }}
+{{ $bio := $author.Params.bio | default "" }}
+{{ $social := $author.Params.social | default dict }}
+<div class="flex items-start gap-5 p-6 bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px]">
+  {{ if $image }}
+  <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-[#e8e4dc] bg-cover bg-center overflow-hidden" style="background-image: url('{{ $image | relURL }}');"></div>
+  {{ else }}
+  <div class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-[#e8e4dc] flex items-center justify-center text-[#9a9aa0] font-['Inter'] text-lg font-bold">{{ substr $name 0 1 }}</div>
+  {{ end }}
+  <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-[#1a1a1a] font-['Inter'] text-[15px] font-bold">{{ $name }}</span>
+      <a href="/authors/{{ $slug }}/" class="text-[#fc5200] font-['Inter'] text-[12px] font-semibold no-underline hover:underline ml-auto">Lihat artikel &rarr;</a>
+    </div>
+    {{ if $bio }}
+    <p class="text-[#5a5a62] font-['Inter'] text-[13px] leading-[1.55] mt-1.5 max-w-[480px]">{{ $bio }}</p>
+    {{ end }}
+    {{ $hasSocial := or $social.instagram $social.x $social.linkedin $social.website }}
+    {{ if $hasSocial }}
+    <div class="flex items-center gap-3 mt-2.5">
+      {{ with $social.website }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="Website">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </a>
+      {{ end }}
+      {{ with $social.instagram }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="Instagram">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      {{ end }}
+      {{ with $social.x }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="X / Twitter">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      {{ end }}
+      {{ with $social.linkedin }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-[#9a9aa0] hover:text-[#fc5200] transition-colors" aria-label="LinkedIn">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

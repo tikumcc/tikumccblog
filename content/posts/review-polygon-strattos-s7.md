@@ -2,6 +2,7 @@
 slug: "review-polygon-strattos-s7"
 title: "Review Polygon Strattos S7: Sepeda Balap Lokal Rasa Premium"
 date: 2026-01-15
+author: "tikum-team"
 category: "Ulasan"
 rating: 5
 tags:

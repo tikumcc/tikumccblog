@@ -91,5 +91,40 @@
       {{ end }}
     </aside>
   </div>
+
+  {{/* Author profile */}}
+  {{ if .Params.author }}
+  <div class="pb-12 max-w-[680px]">
+    {{ partial "author-profile" . }}
+  </div>
+  {{ end }}
 </div>
+
+{{/* SEO: Article author structured data */}}
+{{ if .Params.author }}
+  {{ with .Site.GetPage (printf "/authors/%s" .Params.author) }}
+    {{ $name := .Params.name | default .Title }}
+    {{ $image := .Params.image | default "" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ $.Title | jsonify }},
+  "description": {{ $.Summary | plainify | truncate 160 | jsonify }},
+  "datePublished": {{ $.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ $name | jsonify }}
+    {{ if $image }},
+    "image": {{ ($image | absURL) | jsonify }}
+    {{ end }}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ $.Permalink | jsonify }}
+  }
+}
+</script>
+  {{ end }}
+{{ end }}
 {{ end }}

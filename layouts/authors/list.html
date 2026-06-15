@@ -1,0 +1,42 @@
+{{ define "title" }}Penulis — {{ .Site.Title }}{{ end }}
+{{ define "description" }}Penulis yang berkontribusi di blog Tikum.{{ end }}
+
+{{ define "main" }}
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
+  <div class="py-8 sm:pt-11 sm:pb-5">
+    <div class="flex items-center gap-2 mb-3">
+      <a href="/" class="text-[#9a9aa0] font-['Inter'] text-[13px] font-medium no-underline">Beranda</a>
+      <span class="text-[#c4c4ca] text-[13px]">/</span>
+      <span class="text-[#fc5200] font-['Inter'] text-[13px] font-semibold">Penulis</span>
+    </div>
+    <h1 class="text-[#1a1a1a] font-['Inter'] text-[32px] sm:text-[42px] font-extrabold leading-[1.1] tracking-[-1px]">Penulis</h1>
+    <p class="max-w-[620px] text-[#5a5a62] font-['Inter'] text-base leading-[1.55] mt-3">Penulis yang berkontribusi di blog Tikum.</p>
+  </div>
+
+  <div class="flex flex-col gap-4 pb-9">
+    {{ range .Pages.ByParam "name" }}
+    {{ $name := .Params.name | default .Title }}
+    {{ $slug := .Params.slug | default .File.ContentBaseName }}
+    {{ $image := .Params.image | default "" }}
+    {{ $bio := .Params.bio | default "" }}
+    {{ $authorPosts := where $.Site.RegularPages "Params.author" $slug }}
+    <a href="/authors/{{ $slug }}/" class="flex items-start gap-4 p-5 bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] no-underline hover:shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-8px_rgba(252,82,0,0.12)] transition-shadow">
+      {{ if $image }}
+      <div class="w-14 h-14 shrink-0 rounded-full bg-[#e8e4dc] bg-cover bg-center overflow-hidden" style="background-image: url('{{ $image | relURL }}');"></div>
+      {{ else }}
+      <div class="w-14 h-14 shrink-0 rounded-full bg-[#e8e4dc] flex items-center justify-center text-[#9a9aa0] font-['Inter'] text-lg font-bold">{{ substr $name 0 1 }}</div>
+      {{ end }}
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2">
+          <span class="text-[#1a1a1a] font-['Inter'] text-[15px] font-bold">{{ $name }}</span>
+          <span class="text-[#9a9aa0] font-['Inter'] text-[12px] font-medium">{{ len $authorPosts }} artikel</span>
+        </div>
+        {{ if $bio }}
+        <p class="text-[#5a5a62] font-['Inter'] text-[13px] leading-[1.55] mt-1">{{ $bio }}</p>
+        {{ end }}
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

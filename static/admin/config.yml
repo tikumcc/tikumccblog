@@ -7,6 +7,25 @@ media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "authors"
+    label: "Authors"
+    label_singular: "Author"
+    folder: "content/authors"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "authors/{{slug}}"
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string", hint: "Author identifier used to link posts. Use lowercase, e.g. 'tikum-team'."}
+      - {label: "Profile Image", name: "image", widget: "image", required: false}
+      - {label: "Short Bio", name: "bio", widget: "text", required: false}
+      - {label: "Social Links", name: "social", widget: "object", required: false, fields: [
+          {label: "Instagram URL", name: "instagram", widget: "string", required: false},
+          {label: "X / Twitter URL", name: "x", widget: "string", required: false},
+          {label: "LinkedIn URL", name: "linkedin", widget: "string", required: false},
+          {label: "Website URL", name: "website", widget: "string", required: false}
+        ]}
+
   - name: "posts"
     label: "Posts"
     label_singular: "Post"
@@ -18,6 +37,7 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Category", name: "category", widget: "select", options: ["Ulasan", "Tips", "Berita"]}
+      - {label: "Author", name: "author", widget: "relation", collection: "authors", search_fields: ["name"], value_field: "slug", display_fields: ["name"], required: false}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
       - {label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, required: false, value_type: "float"}
       - {label: "Tags", name: "tags", widget: "list", required: false}
