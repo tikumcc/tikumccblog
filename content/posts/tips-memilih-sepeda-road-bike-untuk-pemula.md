@@ -3,6 +3,8 @@ title: Tips Memilih Sepeda Road Bike Untuk Pemula
 date: 2026-06-15T22:55:00.000+01:00
 category: Tips
 author: dimas
+tags:
+  - roadbike
 ---
 Let's make sure we're on the same page. Sepeda road bike di sini adalah sepeda balap ya, bukan city bike. Ciri-cirinya, ban roda kecil (biasanya lebar 25mm - 30mm), ringan (kebanyakan menggunakan material carbon atau aluminium), made for speed (di jalan raya cenderung lebih cepat dari sepeda lain).
 
