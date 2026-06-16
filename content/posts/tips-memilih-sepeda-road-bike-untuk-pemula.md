@@ -18,6 +18,7 @@ Penting buat tau budget di awal, karena sepeda road bike ada yang dibawah lima j
 * 10jt - 30jt
 * 30jt - 75jt
 * \>75jt
+* 100jt
 
 Size
 
