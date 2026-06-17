@@ -3,7 +3,7 @@ backend:
   repo: tikumcc/tikumccblog
   branch: main
   base_url: https://blog-tikum-oauth.dimaskurniantoroaji.workers.dev
-  auth_endpoint: api/oauth/auth
+  auth_endpoint: auth
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
