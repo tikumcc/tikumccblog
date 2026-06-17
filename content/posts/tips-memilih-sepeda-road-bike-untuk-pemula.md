@@ -3,7 +3,7 @@ title: Tips Memilih Sepeda Road Bike Untuk Pemula
 date: 2026-06-15T22:55:00.000+01:00
 category: Tips
 author: dimas
-image: /images/uploads/whatsapp-image-2026-06-17-at-15.21.45.jpeg
+image: /images/uploads/whatsapp-image-2026-06-17-at-15.21.45.png
 tags:
   - roadbike
 ---
