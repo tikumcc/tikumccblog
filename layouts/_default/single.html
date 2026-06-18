@@ -134,10 +134,10 @@
         </script>
       </div>
 
-      {{ if gt (len (where .Site.RegularPages "Section" "posts")) 1 }}
+      {{ if gt (len .Site.RegularPages) 1 }}
       <div class="bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] p-5">
         <h3 class="text-[#9a9aa0] font-['Inter'] text-[11px] font-bold tracking-[0.6px] uppercase mb-3">Artikel Terkait</h3>
-        {{ $related := where .Site.RegularPages "Section" "posts" | complement (slice .) | first 3 }}
+        {{ $related := .Site.RegularPages | complement (slice .) | first 3 }}
         {{ range $related }}
         <div class="flex items-start gap-3 py-2 border-b border-[#ececf0] last:border-0">
           <div class="flex-1 min-w-0">

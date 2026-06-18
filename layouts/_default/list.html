@@ -34,7 +34,7 @@
 
   {{/* Post grid */}}
   <div class="flex flex-wrap gap-4 sm:gap-6 pb-9">
-    {{ range (.Paginate (where .Site.RegularPages "Section" "posts") 30).Pages }}
+    {{ range (.Paginate .Site.RegularPages 30).Pages }}
     <article class="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex flex-col bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_8px_24px_-12px_rgba(0,0,0,0.12)] rounded-[14px] overflow-hidden">
       {{ if .Params.image }}
       <div class="w-full h-[180px] bg-[#e8e4dc] bg-cover bg-center" style="background-image: url('{{ .Params.image | relURL }}');"></div>
@@ -73,11 +73,7 @@
 </div>
 {{ else }}
 {{/* CATEGORY LANDING PAGES */}}
-{{ $catFilter := "" }}
-{{ if eq .Section "reviews" }}{{ $catFilter = "Ulasan" }}{{ end }}
-{{ if eq .Section "tips" }}{{ $catFilter = "Tips" }}{{ end }}
-{{ if eq .Section "news" }}{{ $catFilter = "Berita" }}{{ end }}
-{{ $filteredPages := where .Site.RegularPages "Params.category" $catFilter }}
+{{ $filteredPages := .RegularPages }}
 <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12">
   <div class="py-8 sm:pt-11 sm:pb-5">
     <div class="flex items-center gap-2 mb-3">

@@ -42,7 +42,3 @@ outputs:
     - HTML
   page:
     - HTML
-
-# Category-based sections for routing
-permalinks:
-  posts: /:slug/
