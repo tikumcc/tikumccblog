@@ -32,6 +32,10 @@
 
     <div class="flex items-center gap-3 mt-4 flex-wrap">
       <time class="text-[#9a9aa0] font-['Inter'] text-xs sm:text-[13px] font-medium" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+      {{- if and .Lastmod (ne .Lastmod .Date) }}
+      <span class="text-[#c4c4ca]">·</span>
+      <span class="text-[#9a9aa0] font-['Inter'] text-xs sm:text-[13px] font-medium">Diperbarui <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "2 Jan 2006" }}</time></span>
+      {{- end }}
       {{ if .Params.rating }}
       <span class="text-[#c4c4ca]">|</span>
       <div class="star-rating gap-0.5">
@@ -165,7 +169,8 @@
   "@type": "Article",
   "headline": {{ $.Title | jsonify }},
   "description": {{ $.Summary | plainify | truncate 160 | jsonify }},
-  "datePublished": {{ $.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "datePublished": {{ $.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},{{ if and $.Lastmod (ne $.Lastmod $.Date) }}
+  "dateModified": {{ $.Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},{{ end }}
   "author": {
     "@type": "Person",
     "name": {{ $name | jsonify }}

@@ -28,6 +28,7 @@ menu:
 # Hugo config
 publishDir: public
 buildDrafts: false
+enableGitInfo: true
 enableRobotsTXT: true
 
 # Markdown rendering
